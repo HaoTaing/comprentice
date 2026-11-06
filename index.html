@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Comprenticeship is a free, open method for community-based learning: the community is the teacher and the student is the apprentice.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Comprenticeship</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a single newspaper column under a masthead; tabs switch the "section" of the paper, rules divide stories. */
+:root {
+  --paper: #FDFEFD;
+  --ink: #17191A;
+  --ink-soft: #4F5553;
+  --rule: #D9DBD6;
+  --tint: #F1F6F2;
+  --accent: #2F7A4A;
+  --accent-strong: #3E8957;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141615; --ink: #ECEDE9; --ink-soft: #A9AFAB; --rule: #2E332F;
+    --tint: #1C2620; --accent: #7BC895; --accent-strong: #64D88B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141615; --ink: #ECEDE9; --ink-soft: #A9AFAB; --rule: #2E332F;
+  --tint: #1C2620; --accent: #7BC895; --accent-strong: #64D88B; color-scheme: dark;
+}
+
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--paper);
+}
+.wrap {
+  max-width: 1040px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--serif); text-wrap: balance; margin: 0; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Masthead */
+.masthead { text-align: center; padding-block: 44px 28px; border-bottom: 3px double var(--ink); }
+.masthead .kicker { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.masthead h1 { font-size: clamp(34px, 10.4vw, 88px); font-weight: 700; line-height: 1; letter-spacing: -.01em; margin-top: 10px; }
+.masthead .tag { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 10px; }
+.dateline {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  padding-block: 8px; border-bottom: 3px double var(--ink);
+}
+
+/* Tabs */
+.tabbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+}
+.tabs { display: flex; justify-content: center; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 0 0 auto; appearance: none; border: 0; background: none; cursor: pointer;
+  font: 600 15px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); padding: 22px 4px 16px; border-bottom: 3px solid transparent;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent-strong); }
+
+main { padding-block: 48px 72px; }
+.panel { animation: fade .25s ease; }
+@keyframes fade { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
+
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.col { max-width: 680px; margin: 0 auto; }
+
+/* Story */
+.headline { font-size: clamp(32px, 5.4vw, 54px); line-height: 1.08; margin-top: 12px; }
+.dek { font-family: var(--serif); font-size: 22px; line-height: 1.45; color: var(--ink-soft); margin-top: 18px; }
+.byline { font-size: 13px; color: var(--ink-soft); margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.article { font-family: var(--serif); font-size: 20px; line-height: 1.65; display: grid; gap: 22px; margin-top: 34px; }
+.article .dropcap::first-letter {
+  float: left; font-size: 74px; line-height: .82; font-weight: 700; padding: 6px 10px 0 0; color: var(--accent);
+}
+.article ul { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+.pull {
+  margin: 14px 0; padding-block: 26px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  font-family: var(--serif); font-style: italic; font-size: clamp(28px, 4.4vw, 40px); line-height: 1.2;
+  color: var(--accent); text-align: center; text-wrap: balance;
+}
+
+/* The Word */
+.entry { text-align: center; padding-block: 12px 40px; border-bottom: 1px solid var(--rule); }
+.entry .word { font-family: var(--serif); font-size: clamp(38px, 12vw, 104px); font-weight: 700; line-height: 1; margin-top: 14px; }
+.entry .word .dot { color: var(--accent); }
+.entry .pos { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 12px; }
+.say { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; margin-top: 18px; font-size: 16px; }
+.say b { font-weight: 600; letter-spacing: .02em; }
+.say span { color: var(--ink-soft); }
+.definition { font-family: var(--serif); font-size: 24px; line-height: 1.45; max-width: 620px; margin: 26px auto 0; }
+.origin { margin-top: 44px; }
+.origin h2 { font-size: 30px; margin-top: 10px; }
+.roots { display: grid; gap: 0; margin-top: 22px; border-top: 1px solid var(--ink); }
+.root { display: grid; grid-template-columns: minmax(110px, 180px) minmax(0, 1fr); gap: 20px; padding-block: 18px; border-bottom: 1px solid var(--rule); }
+.root .morph { font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--accent); }
+.root .lang { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); font-family: var(--sans); font-weight: 600; margin-top: 4px; }
+.root p { font-family: var(--serif); font-size: 19px; }
+.closing { font-family: var(--serif); font-style: italic; font-size: 22px; text-align: center; margin-top: 34px; color: var(--ink-soft); }
+
+/* How it works */
+.section-head { text-align: center; max-width: 680px; margin: 0 auto; }
+.section-head h2 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.1; margin-top: 10px; }
+.section-head p { font-family: var(--serif); font-size: 20px; color: var(--ink-soft); margin-top: 14px; }
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 40px; border-top: 1px solid var(--ink); }
+.phase { padding: 22px 20px 26px; border-right: 1px solid var(--rule); display: grid; align-content: start; gap: 8px; }
+.phase:last-child { border-right: 0; }
+.phase .n { font-family: var(--serif); font-size: 46px; font-weight: 700; line-height: 1; color: var(--accent); }
+.phase h3 { font-size: 24px; }
+.phase .weeks { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.phase p { font-size: 16px; }
+.dogain { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.list-card { background: var(--tint); padding: 24px 26px; }
+.list-card h3 { font-size: 24px; }
+.list-card ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+.list-card li { padding-block: 10px; border-top: 1px solid var(--rule); font-weight: 600; display: flex; justify-content: space-between; gap: 12px; }
+.list-card li span { font-weight: 400; color: var(--ink-soft); font-size: 15px; text-align: right; }
+
+/* Comparison */
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 36px; }
+.ill { margin: 0; padding: 22px 22px 18px; border-top: 1px solid var(--ink); display: grid; gap: 8px; align-content: start; }
+.ill:last-child { background: var(--tint); }
+.ill svg { width: 100%; height: auto; display: block; }
+.ill-label { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+.ill-label.accent { color: var(--accent); }
+.ill figcaption { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink-soft); }
+.s-soft { stroke: var(--ink-soft); } .s-ink { stroke: var(--ink); } .s-acc { stroke: var(--accent); }
+.f-soft { fill: var(--ink-soft); } .f-ink { fill: var(--ink); } .f-acc { fill: var(--accent); }
+.f-paper { fill: var(--paper); } .f-tint { fill: var(--tint); }
+.t-soft { fill: var(--ink-soft); } .t-ink { fill: var(--ink); } .t-acc { fill: var(--accent); }
+.t-sm { font: 500 15px var(--sans); } .t-md { font: 600 17px var(--sans); }
+.compare-table { margin-top: 30px; display: grid; gap: 12px; }
+.compare-table td { font-size: 15px; }
+.compare-table .rowhead { font-weight: 600; white-space: nowrap; }
+.compare-table td:last-child, .compare-table th.acc-col { color: var(--ink); background: var(--tint); }
+.compare-table th.acc-col { color: var(--accent); }
+.divider { border: 0; border-top: 3px double var(--ink); margin: 56px 0 48px; }
+
+/* Syllabus */
+.syl-title { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.draft { font: 700 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); border: 1px solid var(--ink-soft); padding: 6px 8px; }
+.facts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 34px 0 30px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.fact { padding: 16px 14px; border-right: 1px solid var(--rule); }
+.fact:last-child { border-right: 0; }
+.fact b { display: block; font-family: var(--serif); font-size: 26px; line-height: 1.1; font-weight: 600; }
+.fact span { font-size: 14px; color: var(--ink-soft); }
+details { border-bottom: 1px solid var(--rule); }
+details:first-of-type { border-top: 1px solid var(--rule); }
+summary {
+  cursor: pointer; list-style: none; padding-block: 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-family: var(--serif); font-size: 23px; font-weight: 600;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--sans); font-weight: 400; font-size: 26px; color: var(--accent); }
+details[open] summary::after { content: "–"; }
+.dbody { padding-bottom: 26px; display: grid; gap: 14px; }
+.dbody ol, .dbody ul { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.tablebox { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
+th { text-align: left; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 12px; border-bottom: 1px solid var(--ink); }
+td { padding: 11px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.wk { font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--accent); }
+tr.phase-start td { border-top: 1px solid var(--ink-soft); }
+.note { font-size: 15px; color: var(--ink-soft); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px;
+  font: 600 15px/1 var(--sans); letter-spacing: .04em; border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+  cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: var(--accent); border-color: var(--accent); }
+.cta { display: grid; justify-items: center; gap: 10px; margin-top: 36px; text-align: center; }
+
+/* Partners */
+.partner-list { list-style: none; padding: 0; margin: 34px 0 0; display: grid; border-top: 1px solid var(--ink); }
+.partner-list li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding-block: 20px; border-bottom: 1px solid var(--rule); font-family: var(--serif); font-size: 21px; line-height: 1.45; }
+.partner-list svg { width: 28px; height: 28px; stroke: var(--accent); margin-top: 4px; }
+.contact { font-size: 15px; color: var(--ink-soft); }
+
+footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align: center; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-soft); }
+
+@media (max-width: 820px) {
+  .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phase:nth-child(2) { border-right: 0; }
+  .phase:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact { border-bottom: 1px solid var(--rule); }
+  .fact:nth-child(2n) { border-right: 0; }
+  .fact:last-child { grid-column: 1 / -1; border-bottom: 0; }
+}
+.tab .sh { display: none; }
+.panel { scroll-margin-top: 80px; }
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .tab .lg { display: none; }
+  .tab .sh { display: inline; }
+  .tab { font-size: 12.5px; letter-spacing: .05em; padding: 18px 2px 13px; }
+  .compare-table th { font-size: 11px; letter-spacing: .04em; overflow-wrap: anywhere; }
+  .tabs { justify-content: center; gap: 14px; }
+  .compare-table table { min-width: 0; table-layout: fixed; }
+  .compare-table th, .compare-table td { padding: 10px 8px; font-size: 13.5px; }
+  .compare-table th:first-child, .compare-table td.rowhead { width: 28%; }
+  .compare-table .rowhead { white-space: normal; }
+  .ill { padding: 18px 14px 14px; }
+  .facts { margin: 26px 0 22px; }
+  .fact b { font-size: 22px; }
+  .masthead { padding-block: 28px 16px; }
+  .section-head h2 { font-size: 28px; }
+  .phases, .dogain, .compare { grid-template-columns: minmax(0, 1fr); }
+  .phase { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .root { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .article { font-size: 18px; }
+}
+/* Canvas planner */
+.pl { max-width: 960px; margin: 34px auto 0; border-top: 1px solid var(--ink); padding-top: 20px; display: grid; gap: 18px; }
+.pl-top { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between; align-items: center; }
+.pl-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.pl-steps button {
+  appearance: none; border: 1px solid var(--rule); background: var(--paper); color: var(--ink-soft); cursor: pointer;
+  font: 600 12.5px/1 var(--sans); letter-spacing: .04em; padding: 9px 11px; min-height: 36px; display: inline-flex; gap: 6px; align-items: center;
+}
+.pl-steps button .n { font-variant-numeric: tabular-nums; color: var(--accent); }
+.pl-steps button[aria-current="step"] { border-color: var(--ink); color: var(--ink); background: var(--tint); }
+.pl-steps button.done .n::after { content: " ✓"; }
+.pl-tools { display: flex; gap: 14px; }
+.pl-link { appearance: none; border: 0; background: none; padding: 6px 0; cursor: pointer; font: 600 13.5px var(--sans); color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.pl-bar { height: 3px; background: var(--rule); }
+.pl-bar span { display: block; height: 100%; width: 0; background: var(--accent-strong); transition: width .3s ease; }
+@media (prefers-reduced-motion: reduce) { .pl-bar span { transition: none; } }
+.pl-note { font-size: 14px; color: var(--accent); }
+.pl-step { display: grid; gap: 8px; }
+.pl-step[hidden], .pl-note[hidden] { display: none; }
+.pl-kicker { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+.pl-step h3 { font-size: clamp(26px, 3.6vw, 34px); line-height: 1.1; }
+.pl-lede { font-family: var(--serif); font-size: 19px; color: var(--ink-soft); }
+.pl-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 12px; }
+.pl-cols.one { grid-template-columns: minmax(0, 1fr); }
+.pl-side { margin: 0; min-width: 0; border: 1px solid var(--rule); padding: 18px 18px 20px; display: grid; gap: 8px; align-content: start; background: var(--paper); }
+.pl-side.partner { border-top: 3px solid var(--accent-strong); }
+.pl-side.student { border-top: 3px solid var(--ink); }
+.pl-side.together { border-top: 3px double var(--accent-strong); background: var(--tint); }
+.pl-side legend { padding: 0 6px; margin-left: -6px; }
+.who { font: 700 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.who.partner, .who.together { color: var(--accent); }
+.who.student { color: var(--ink); }
+.pl-side label, .pl-label { font-size: 14px; font-weight: 600; margin-top: 6px; }
+.pl-side input[type="text"], .pl-side input[type="time"], .pl-side textarea {
+  width: 100%; box-sizing: border-box; font: 400 16px/1.45 var(--sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 0; padding: 10px 12px; min-height: 44px;
+}
+.pl-side textarea { resize: vertical; }
+.pl-side input:focus, .pl-side textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; margin: 0 !important; cursor: pointer; }
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip span { display: inline-flex; align-items: center; min-height: 38px; padding: 0 13px; border: 1px solid var(--rule); background: var(--paper); font: 500 14px var(--sans); color: var(--ink); }
+.chip input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.checks { display: grid; gap: 4px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500 !important; font-size: 15px !important; cursor: pointer; min-height: 32px; margin: 0 !important; }
+.check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.meter-box { background: var(--tint); }
+.weeks { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; margin-top: 6px; }
+.weeks i { display: grid; place-items: center; aspect-ratio: 1; max-width: 100%; border: 1px solid var(--accent); font: 600 11px var(--sans); font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; }
+.weeks.on i { background: var(--accent); color: var(--paper); }
+.meter-line { font-family: var(--serif); font-size: 20px; margin-top: 8px; }
+.meter-sub { font-size: 14px; color: var(--ink-soft); }
+.agree { border: 1px solid var(--ink); padding: 24px 26px; display: grid; gap: 14px; background: var(--paper); margin-top: 8px; }
+.agree h4 { font-family: var(--serif); font-size: 22px; margin: 0; font-weight: 600; }
+.agree .parties { font-size: 15px; color: var(--ink-soft); }
+.agree dl { margin: 0; display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr); border-top: 1px solid var(--rule); }
+.agree dt, .agree dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+.agree dt { font-weight: 700; padding-right: 14px; }
+.agree dd { white-space: pre-line; }
+.agree .empty { color: var(--ink-soft); font-style: italic; }
+.agree-sign { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 6px; }
+.agree-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.pl-nav { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--rule); padding-top: 18px; }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--tint); color: var(--ink); border-color: var(--ink); }
+.btn[disabled] { opacity: .35; cursor: default; }
+@media (max-width: 640px) {
+  .pl-cols { grid-template-columns: minmax(0, 1fr); }
+  .pl-steps button { padding: 8px 9px; font-size: 12px; }
+  .agree { padding: 18px 16px; }
+  .agree dl { grid-template-columns: minmax(0, 1fr); }
+  .agree dt { border-bottom: 0; padding-bottom: 0; }
+  .weeks i { font-size: 9.5px; }
+}
+@media (max-width: 440px) {
+  .tabs { gap: 7px; justify-content: flex-start; }
+  .tabs::before, .tabs::after { content: ""; margin: auto; }
+  .tab { font-size: 11px; letter-spacing: .02em; padding-inline: 1px; }
+}
+
+/* Mobile menu */
+.mnav, .mnav-list { display: none; }
+@media (max-width: 640px) {
+  .tabs { display: none; }
+  .mnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px; }
+  .mnav-cur { font: 700 13px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); border-bottom: 3px solid var(--accent-strong); padding-bottom: 4px; }
+  .mnav-btn { appearance: none; background: none; border: 0; margin-right: -12px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; font: 600 13px var(--sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .mnav-btn svg path { transition: transform .2s ease, opacity .2s ease; transform-origin: center; }
+  .mnav-btn[aria-expanded="true"] .l1 { transform: translateY(5px) rotate(45deg); }
+  .mnav-btn[aria-expanded="true"] .l2 { opacity: 0; }
+  .mnav-btn[aria-expanded="true"] .l3 { transform: translateY(-5px) rotate(-45deg); }
+  .mnav-list:not([hidden]) { display: block; list-style: none; margin: 0; padding: 4px 0 12px; border-top: 1px solid var(--rule); }
+  .mnav-list a { display: block; padding: 13px 2px; font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .mnav-list .subl a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 10px 2px 10px 18px; }
+  .mnav-list a[aria-current="page"] { color: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) { .mnav-btn svg path { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">An Idea for Higher Education</p>
+    <h1>Comprenticeship</h1>
+    <p class="tag">A new way to learn with community</p>
+  </header>
+</div>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-story" aria-controls="story" data-tab="story"><span class="lg">The Story</span><span class="sh" aria-hidden="true">Story</span></button>
+      <button class="tab" role="tab" id="tab-how" aria-controls="how" data-tab="how"><span class="lg">How It Works</span><span class="sh" aria-hidden="true">How</span></button>
+      <button class="tab" role="tab" id="tab-canvas" aria-controls="canvas" data-tab="canvas"><span class="lg">The Canvas</span><span class="sh" aria-hidden="true">Canvas</span></button>
+      <button class="tab" role="tab" id="tab-syllabus" aria-controls="syllabus" data-tab="syllabus"><span class="lg">The Syllabus</span><span class="sh" aria-hidden="true">Syllabus</span></button>
+    </div>
+    <div class="mnav">
+      <span class="mnav-cur" id="mnav-cur">The Story</span>
+      <button type="button" class="mnav-btn" id="mnav-btn" aria-expanded="false" aria-controls="mnav-list">
+        <span>Menu</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"></path><path class="l2" d="M4 12h16"></path><path class="l3" d="M4 17h16"></path></svg>
+      </button>
+    </div>
+    <ul class="mnav-list" id="mnav-list" hidden>
+      <li><a href="#story">The Story</a></li>
+      <li class="subl"><a href="#origin">Origin of the word</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li class="subl"><a href="#partners">For community partners</a></li>
+      <li><a href="#canvas">The Canvas</a></li>
+      <li><a href="#syllabus">The Syllabus</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- THE STORY -->
+  <section class="panel" id="story" role="tabpanel" aria-labelledby="tab-story">
+    <article class="col">
+      <p class="eyebrow">Education · Feature</p>
+      <h2 class="headline">Students Have Been Serving Communities. What If Communities Taught Them Instead?</h2>
+      <p class="dek">Comprenticeship reframes service learning as a two-way apprenticeship, where the community is the teacher and the student is the apprentice.</p>
+      <p class="byline">A proposal for a new first-year course · UNIV 1015</p>
+
+      <div class="article">
+        <p class="dropcap">For decades, colleges have asked students to "give back." Students sign up for a shift, log their hours, and move on. The hours get counted. The neighborhood gets a few extra hands for an afternoon. And then everyone goes home.</p>
+        <p>It is well meant, but it often runs one way. The student arrives as the helper, and the community is cast as the one being helped. The people who know the neighborhood best, the organizers, elders, staff and residents who have kept it going for years, rarely get to be the experts in the room.</p>
+        <p>Comprenticeship turns that around. It borrows from one of the oldest ways people have learned anything: the apprenticeship. An apprentice works beside someone who knows the craft, over time, with growing responsibility. In comprenticeship, the craft is the community itself, and the community is the teacher.</p>
+
+        <blockquote class="pull">Learning with the community, not for it.</blockquote>
+
+        <p>The idea builds on the established field of community-engaged learning, with three commitments:</p>
+        <ul>
+          <li><strong>The community is an expert source of knowledge.</strong> Students come to learn, not to fix.</li>
+          <li><strong>The relationship is a weekly routine over a full semester.</strong> Trust takes time, so one-off visits are not enough.</li>
+          <li><strong>The final project is shaped by what the partner asks for.</strong> Not by what a student assumes is needed.</li>
+        </ul>
+        <p>In practice, students spend a semester with one community partner, ideally in a small group of two or three classmates so they build belonging with each other as well as with the community. Students can also choose to go solo. They listen before they act. They show up every week. And they finish by co-creating something the partner actually asked for, then celebrate it together, with partners in the room as honored co-educators.</p>
+        <p>The result is a different kind of graduate: one who has learned that showing up, again and again, is how you become part of a place.</p>
+      </div>
+    </article>
+    <hr class="divider" id="origin-word">
+    <div class="col">
+      <div class="entry">
+        <p class="eyebrow">Word of the Semester</p>
+        <p class="word">com<span class="dot">·</span>pren<span class="dot">·</span>tice</p>
+        <p class="pos">noun</p>
+        <div class="say">
+          <p><span>Say it:</span> <b>kom-PREN-tiss</b></p>
+          <p><span>The practice:</span> <b>comprenticeship</b> · kom-PREN-tiss-ship</p>
+        </div>
+        <p class="definition">A student who learns <em>with</em> a community, not <em>for</em> it, through a semester-long apprenticeship in which the community is the teacher.</p>
+      </div>
+
+      <div class="origin">
+        <p class="eyebrow">Etymology</p>
+        <h2>Origin of the Word</h2>
+        <div class="roots">
+          <div class="root">
+            <div class="morph">com-<span class="lang">Latin</span></div>
+            <p>A prefix meaning "together" or "with," as in <em>companion</em>, <em>compassion</em> and <em>community</em>.</p>
+          </div>
+          <div class="root">
+            <div class="morph">prentice<span class="lang">Middle English</span></div>
+            <p>The old short form of "apprentice," which traces back to the French <em>apprendre</em>, "to learn."</p>
+          </div>
+          <div class="root">
+            <div class="morph">communis<span class="lang">Latin</span></div>
+            <p>The root of "community": <em>com-</em> (together) plus <em>munus</em>, a shared gift or duty. The word for community already meant giving to each other.</p>
+          </div>
+        </div>
+        <p class="closing">The two-way relationship was in the word all along.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+  <section class="panel" id="how" role="tabpanel" aria-labelledby="tab-how" hidden>
+    <div class="section-head">
+      <p class="eyebrow">What's Different</p>
+      <h2>Service Learning vs. Comprenticeship</h2>
+      <p>The biggest change is the direction of the relationship.</p>
+    </div>
+
+    <div class="compare">
+      <figure class="ill muted-fig">
+        <p class="ill-label">Traditional Service Learning</p>
+        <svg viewBox="0 0 360 220" role="img" aria-label="One-way: an arrow labeled hours given points from the student to the community.">
+          <defs>
+            <marker id="ah-soft" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="f-soft"></path></marker>
+          </defs>
+          <text x="180" y="88" text-anchor="middle" class="t-soft t-sm">Hours given</text>
+          <line x1="96" y1="105" x2="244" y2="105" class="s-soft" stroke-width="2.5" marker-end="url(#ah-soft)"></line>
+          <g class="s-soft f-paper" stroke-width="2.2" stroke-linejoin="round"><circle cx="62" cy="90" r="11"></circle><path d="M41 126 a21 21 0 0 1 42 0 z"></path></g>
+          <g class="s-soft f-paper" stroke-width="2.2" stroke-linejoin="round"><circle cx="276" cy="95" r="8"></circle><path d="M260 126 a16 16 0 0 1 32 0 z"></path><circle cx="324" cy="95" r="8"></circle><path d="M308 126 a16 16 0 0 1 32 0 z"></path><circle cx="300" cy="87" r="10"></circle><path d="M280 126 a20 20 0 0 1 40 0 z"></path></g>
+          <text x="62" y="160" text-anchor="middle" class="t-ink t-md">Student</text>
+          <text x="62" y="180" text-anchor="middle" class="t-soft t-sm">the helper</text>
+          <text x="300" y="164" text-anchor="middle" class="t-ink t-md">Community</text>
+          <text x="300" y="184" text-anchor="middle" class="t-soft t-sm">the one helped</text>
+        </svg>
+        <figcaption>Visit, log hours, leave. Value flows one way.</figcaption>
+      </figure>
+
+      <figure class="ill">
+        <p class="ill-label accent">Comprenticeship</p>
+        <svg viewBox="0 0 360 220" role="img" aria-label="Two-way: presence and work flow from the student to the community, and knowledge and feedback flow back from the community to the student.">
+          <defs>
+            <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="f-ink"></path></marker>
+            <marker id="ah-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="f-acc"></path></marker>
+          </defs>
+          <text x="180" y="22" text-anchor="middle" class="t-ink t-sm">Presence &amp; work</text>
+          <path d="M88 88 Q180 22 258 74" fill="none" class="s-ink" stroke-width="2.5" marker-end="url(#ah-ink)"></path>
+          <path d="M252 130 Q176 192 92 124" fill="none" class="s-acc" stroke-width="2.5" marker-end="url(#ah-acc)"></path>
+          <text x="180" y="212" text-anchor="middle" class="t-acc t-sm">Knowledge &amp; feedback</text>
+          <g class="s-ink f-paper" stroke-width="2.2" stroke-linejoin="round"><circle cx="62" cy="90" r="11"></circle><path d="M41 126 a21 21 0 0 1 42 0 z"></path></g>
+          <g class="s-acc f-tint" stroke-width="2.2" stroke-linejoin="round"><circle cx="276" cy="95" r="8"></circle><path d="M260 126 a16 16 0 0 1 32 0 z"></path><circle cx="324" cy="95" r="8"></circle><path d="M308 126 a16 16 0 0 1 32 0 z"></path><circle cx="300" cy="87" r="10"></circle><path d="M280 126 a20 20 0 0 1 40 0 z"></path></g>
+          <text x="62" y="160" text-anchor="middle" class="t-ink t-md">Student</text>
+          <text x="62" y="178" text-anchor="middle" class="t-soft t-sm">the apprentice</text>
+          <text x="300" y="160" text-anchor="middle" class="t-ink t-md">Community</text>
+          <text x="300" y="178" text-anchor="middle" class="t-acc t-sm">the teacher</text>
+        </svg>
+        <figcaption>Show up weekly, learn, build together. Value flows both ways.</figcaption>
+      </figure>
+    </div>
+
+    <div class="col compare-table">
+      <div class="tablebox">
+        <table>
+          <thead><tr><th></th><th>Traditional Service Learning</th><th class="acc-col">Comprenticeship</th></tr></thead>
+          <tbody>
+            <tr><td class="rowhead">Direction</td><td>Student gives to the community</td><td>Student and community learn from each other</td></tr>
+            <tr><td class="rowhead">The expert</td><td>The student or the school</td><td>The community</td></tr>
+            <tr><td class="rowhead">Time</td><td>Often one-off shifts or scattered hours</td><td>18 hours of weekly routine with one partner over a semester</td></tr>
+            <tr><td class="rowhead">Who decides the work</td><td>The program or the student</td><td>The partner asks; the student co-creates</td></tr>
+            <tr><td class="rowhead">Partner's role</td><td>Host site</td><td>Co-educator, credited and honored</td></tr>
+            <tr><td class="rowhead">What counts</td><td>Hours logged</td><td>Trust built, learning shown, a project the partner wanted</td></tr>
+            <tr><td class="rowhead">What lasts</td><td>A number on a form</td><td>A relationship and a verified record</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Many strong service-learning programs already include reflection and reciprocity. Comprenticeship makes them the default.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-head">
+      <p class="eyebrow">How It Works</p>
+      <h2>Four Phases, One Semester, One Partner</h2>
+      <p>Students move from learning about a community to learning from it, and finally to building something with it.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase"><span class="n">1</span><h3>Foundations</h3><span class="weeks">Weeks 1–3</span><p>Learn why service can be one-way, and map a community's strengths.</p></div>
+      <div class="phase"><span class="n">2</span><h3>Listening</h3><span class="weeks">Weeks 4–6</span><p>Observe, interview, and learn before doing anything.</p></div>
+      <div class="phase"><span class="n">3</span><h3>Practice</h3><span class="weeks">Weeks 7–12</span><p>Keep a weekly routine with one partner and build trust.</p></div>
+      <div class="phase"><span class="n">4</span><h3>Give Back</h3><span class="weeks">Weeks 13–15</span><p>Co-create the project the partner asked for and celebrate together.</p></div>
+    </div>
+
+    <div class="dogain">
+      <div class="list-card">
+        <p class="eyebrow">The Practice</p>
+        <h3>What You Do</h3>
+        <ul>
+          <li>Community <span>Join one partner, in a group of 2–3 or solo</span></li>
+          <li>Listening <span>Learn before you act</span></li>
+          <li>Reciprocity <span>Give and receive</span></li>
+          <li>Routine <span>Show up every week</span></li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <p class="eyebrow">The Outcome</p>
+        <h3>What You Gain</h3>
+        <ul>
+          <li>Belonging <span>Become part of a place</span></li>
+          <li>Skills <span>Listening, co-design, storytelling</span></li>
+          <li>Career <span>Experience employers can verify</span></li>
+          <li>Civic Identity <span>A record of showing up</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="divider" id="for-partners">
+    <div class="col">
+      <div class="section-head">
+        <p class="eyebrow">For Community Organizations</p>
+        <h2>Community Partners Are Co-Educators</h2>
+        <p>Your organization's knowledge is the curriculum. Comprenticeship is built so that hosting students strengthens your work instead of adding to it.</p>
+      </div>
+      <ul class="partner-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h12v15H6a2 2 0 0 0-2 2z"></path><path d="M8 8h6"></path></svg><span>Welcome students, share your knowledge, and name a real project need.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.4"></circle><path d="M3 19a6 6 0 0 1 12 0"></path><path d="M15 19a4.5 4.5 0 0 1 6-4.2"></path></svg><span>Host 2 to 5 students per semester, usually one or two small groups, so you are never overwhelmed.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"></path></svg><span>Receive public recognition as a co-educator in course materials and at the final showcase.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg><span>Give feedback twice a semester; faculty handle all grades.</span></li>
+      </ul>
+      <div class="cta">
+        <button class="btn" type="button" id="partner-btn">Become a Partner</button>
+        <p class="contact" id="partner-note" hidden>Partner inquiries: [contact email coming soon]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CANVAS -->
+  <section class="panel" id="canvas" role="tabpanel" aria-labelledby="tab-canvas" hidden>
+    <div class="section-head">
+      <p class="eyebrow">The Comprenticeship Canvas</p>
+      <h2>Plan Your Comprenticeship Together</h2>
+      <p>For a community partner and a student, or a small group of 2–3 students, to fill in side by side at their first meeting. Eight short steps end in a shared agreement you can both keep.</p>
+      <div class="cta" style="margin-top:20px">
+        <button class="btn ghost" type="button" id="canvas-dl">Download the Printable Canvas (PDF)</button>
+        <p class="note" id="canvas-dl-note" hidden></p>
+      </div>
+    </div>
+
+    <div class="pl" id="planner">
+      <div class="pl-top">
+        <ol class="pl-steps" id="pl-steps" aria-label="Canvas steps"></ol>
+        <div class="pl-tools">
+          <button type="button" class="pl-link" id="pl-example">Fill with an example</button>
+          <button type="button" class="pl-link" id="pl-clear">Start over</button>
+        </div>
+      </div>
+      <div class="pl-bar" aria-hidden="true"><span id="pl-fill"></span></div>
+      <p class="pl-note" id="pl-note" hidden></p>
+
+      <!-- Step 1 -->
+      <div class="pl-step" data-step="1" data-title="Meet">
+        <p class="pl-kicker">Step 1 of 8</p>
+        <h3>Get to Know Each Other</h3>
+        <p class="pl-lede">Before any work, learn who is in the room.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side partner">
+            <legend><span class="who partner">Partner</span></legend>
+            <label for="p-org">Organization</label>
+            <input id="p-org" type="text" placeholder="e.g. Northside Food Shelf">
+            <label for="p-mentor">Your name and role</label>
+            <input id="p-mentor" type="text" placeholder="e.g. Maria, volunteer coordinator">
+            <label for="p-mission">Who you serve, in one sentence</label>
+            <textarea id="p-mission" rows="3" placeholder="We provide groceries to families on the north side…"></textarea>
+          </fieldset>
+          <fieldset class="pl-side student">
+            <legend><span class="who student">Comprentice</span></legend>
+            <label for="s-name">Your name and major (list each person if you are a group of 2–3)</label>
+            <input id="s-name" type="text" placeholder="e.g. Amina, nursing">
+            <span class="pl-label">What you bring</span>
+            <div class="chips" data-group="s-bring">
+              <label class="chip"><input type="checkbox" value="Another language"><span>Another language</span></label>
+              <label class="chip"><input type="checkbox" value="Writing"><span>Writing</span></label>
+              <label class="chip"><input type="checkbox" value="Design"><span>Design</span></label>
+              <label class="chip"><input type="checkbox" value="Social media"><span>Social media</span></label>
+              <label class="chip"><input type="checkbox" value="Data and spreadsheets"><span>Data and spreadsheets</span></label>
+              <label class="chip"><input type="checkbox" value="Working with kids"><span>Working with kids</span></label>
+              <label class="chip"><input type="checkbox" value="Caring for elders"><span>Caring for elders</span></label>
+              <label class="chip"><input type="checkbox" value="Lived experience"><span>Lived experience</span></label>
+            </div>
+            <label for="s-hope">What you hope to learn</label>
+            <textarea id="s-hope" rows="2" placeholder="How a small nonprofit actually runs…"></textarea>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="pl-step" data-step="2" data-title="Teach" hidden>
+        <p class="pl-kicker">Step 2 of 8</p>
+        <h3>What the Community Teaches</h3>
+        <p class="pl-lede">The heart of comprenticeship. The partner is the teacher.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side partner">
+            <legend><span class="who partner">Partner</span></legend>
+            <label for="p-teach">What can your community teach that a classroom can't?</label>
+            <textarea id="p-teach" rows="4" placeholder="How food insecurity really works on our block…"></textarea>
+          </fieldset>
+          <fieldset class="pl-side student">
+            <legend><span class="who student">Comprentice</span></legend>
+            <label for="s-assume">One assumption you're bringing that you want to test</label>
+            <textarea id="s-assume" rows="4" placeholder="I assumed most families who come here are unemployed…"></textarea>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="pl-step" data-step="3" data-title="Listen" hidden>
+        <p class="pl-kicker">Step 3 of 8</p>
+        <h3>Listen First</h3>
+        <p class="pl-lede">Three weeks of observing and asking before doing.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side partner">
+            <legend><span class="who partner">Partner</span></legend>
+            <span class="pl-label">Who the student can learn from</span>
+            <div class="chips" data-group="p-learn">
+              <label class="chip"><input type="checkbox" value="Staff"><span>Staff</span></label>
+              <label class="chip"><input type="checkbox" value="Long-time volunteers"><span>Long-time volunteers</span></label>
+              <label class="chip"><input type="checkbox" value="Board members"><span>Board members</span></label>
+              <label class="chip"><input type="checkbox" value="Community members we serve (with consent)"><span>Community members, with consent</span></label>
+              <label class="chip"><input type="checkbox" value="Neighborhood leaders"><span>Neighborhood leaders</span></label>
+            </div>
+            <label for="p-shadow">What should the student shadow?</label>
+            <input id="p-shadow" type="text" placeholder="e.g. Tuesday intake">
+          </fieldset>
+          <fieldset class="pl-side student">
+            <legend><span class="who student">Comprentice</span></legend>
+            <label for="s-qs">Three questions you will ask</label>
+            <textarea id="s-qs" rows="4" placeholder="1. What changed here in the last ten years?&#10;2. …&#10;3. …"></textarea>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="pl-step" data-step="4" data-title="Routine" hidden>
+        <p class="pl-kicker">Step 4 of 8</p>
+        <h3>The Weekly Routine</h3>
+        <p class="pl-lede">One visit a week, 1.5 hours, the same time each week.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side together">
+            <legend><span class="who together">Together</span></legend>
+            <span class="pl-label">Day of the week</span>
+            <div class="chips radio" data-group="t-day">
+              <label class="chip"><input type="radio" name="t-day" value="Monday"><span>Mon</span></label>
+              <label class="chip"><input type="radio" name="t-day" value="Tuesday"><span>Tue</span></label>
+              <label class="chip"><input type="radio" name="t-day" value="Wednesday"><span>Wed</span></label>
+              <label class="chip"><input type="radio" name="t-day" value="Thursday"><span>Thu</span></label>
+              <label class="chip"><input type="radio" name="t-day" value="Friday"><span>Fri</span></label>
+              <label class="chip"><input type="radio" name="t-day" value="Saturday"><span>Sat</span></label>
+            </div>
+            <label for="t-time">Start time</label>
+            <input id="t-time" type="time" value="15:00">
+            <label for="t-travel">How the student gets there</label>
+            <input id="t-travel" type="text" placeholder="e.g. Bus route 19, 20 minutes">
+            <label for="t-miss">If a week is missed</label>
+            <input id="t-miss" type="text" placeholder="e.g. Text Maria a day ahead; make up on Tuesday">
+          </fieldset>
+          <div class="pl-side meter-box" aria-live="polite">
+            <span class="pl-label">Your semester at a glance</span>
+            <div class="weeks" id="pl-weeks"></div>
+            <p class="meter-line"><b id="pl-when">Pick a day</b></p>
+            <p class="meter-sub">12 visits × 1.5 hours = <b>18 hours</b>, Weeks 4 to 15</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="pl-step" data-step="5" data-title="Need" hidden>
+        <p class="pl-kicker">Step 5 of 8</p>
+        <h3>The Real Need</h3>
+        <p class="pl-lede">The partner names the project. The student helps shape it.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side partner">
+            <legend><span class="who partner">Partner</span></legend>
+            <label for="p-need">One project you've wanted done but haven't had time for</label>
+            <textarea id="p-need" rows="3" placeholder="A welcome guide for new volunteers…"></textarea>
+            <label for="p-notfix">What should the student not try to fix?</label>
+            <input id="p-notfix" type="text" placeholder="e.g. Our intake process">
+          </fieldset>
+          <fieldset class="pl-side student">
+            <legend><span class="who student">Comprentice</span></legend>
+            <label for="s-help">How your skills could help with it</label>
+            <textarea id="s-help" rows="3" placeholder="I can translate it into Somali…"></textarea>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="pl-step" data-step="6" data-title="Exchange" hidden>
+        <p class="pl-kicker">Step 6 of 8</p>
+        <h3>A Fair Exchange</h3>
+        <p class="pl-lede">Both sides give. Both sides gain.</p>
+        <div class="pl-cols">
+          <fieldset class="pl-side partner">
+            <legend><span class="who partner">Partner</span></legend>
+            <span class="pl-label">What we hope to gain</span>
+            <div class="chips" data-group="p-gain">
+              <label class="chip"><input type="checkbox" value="Steady weekly help"><span>Steady weekly help</span></label>
+              <label class="chip"><input type="checkbox" value="A finished project we can keep"><span>A finished project</span></label>
+              <label class="chip"><input type="checkbox" value="Fresh ideas"><span>Fresh ideas</span></label>
+              <label class="chip"><input type="checkbox" value="A future volunteer or staff member"><span>A future volunteer</span></label>
+              <label class="chip"><input type="checkbox" value="Our story told well"><span>Our story told well</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="pl-side student">
+            <legend><span class="who student">Comprentice</span></legend>
+            <span class="pl-label">What I hope to gain</span>
+            <div class="chips" data-group="s-gain">
+              <label class="chip"><input type="checkbox" value="Real-world skills"><span>Real-world skills</span></label>
+              <label class="chip"><input type="checkbox" value="A mentor"><span>A mentor</span></label>
+              <label class="chip"><input type="checkbox" value="Understanding of my community"><span>Understanding my community</span></label>
+              <label class="chip"><input type="checkbox" value="Career direction"><span>Career direction</span></label>
+              <label class="chip"><input type="checkbox" value="A sense of belonging"><span>A sense of belonging</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="pl-step" data-step="7" data-title="Dignity" hidden>
+        <p class="pl-kicker">Step 7 of 8</p>
+        <h3>Safety &amp; Dignity</h3>
+        <p class="pl-lede">Agree on these before the first visit.</p>
+        <div class="pl-cols one">
+          <fieldset class="pl-side together">
+            <legend><span class="who together">Together</span></legend>
+            <div class="checks" data-group="t-dignity">
+              <label class="check"><input type="checkbox" value="Orientation completed before the first visit"><span>Orientation completed before the first visit</span></label>
+              <label class="check"><input type="checkbox" value="Background check done, if the partner requires one"><span>Background check done, if the partner requires one</span></label>
+              <label class="check"><input type="checkbox" value="No photos, audio or posts of people without written consent"><span>No photos, audio or posts of people without written consent</span></label>
+              <label class="check"><input type="checkbox" value="Names of people served are never recorded or shared"><span>Names of people served are never recorded or shared</span></label>
+              <label class="check"><input type="checkbox" value="Stories are told with consent and credit the community"><span>Stories are told with consent and credit the community</span></label>
+            </div>
+            <label for="t-extra">Anything else specific to this site</label>
+            <input id="t-extra" type="text" placeholder="e.g. Food-safety training in Week 2">
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="pl-step" data-step="8" data-title="Lasts" hidden>
+        <p class="pl-kicker">Step 8 of 8</p>
+        <h3>What Lasts</h3>
+        <p class="pl-lede">The 18 hours end. The relationship doesn't have to.</p>
+        <div class="pl-cols one">
+          <fieldset class="pl-side together">
+            <legend><span class="who together">Together</span></legend>
+            <span class="pl-label">After the semester, we'll stay connected by</span>
+            <div class="chips" data-group="t-lasts">
+              <label class="chip"><input type="checkbox" value="Volunteer events"><span>Volunteer events</span></label>
+              <label class="chip"><input type="checkbox" value="Mentoring the next comprentice"><span>Mentoring the next comprentice</span></label>
+              <label class="chip"><input type="checkbox" value="Keeping the project up to date"><span>Keeping the project up to date</span></label>
+              <label class="chip"><input type="checkbox" value="A reference or recommendation"><span>A reference</span></label>
+              <label class="chip"><input type="checkbox" value="A check-in next semester"><span>A check-in next semester</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- Agreement -->
+      <div class="pl-step" data-step="9" data-title="Agreement" hidden>
+        <p class="pl-kicker">Your agreement</p>
+        <h3>The Comprentice Agreement</h3>
+        <p class="pl-lede">Read it together. Copy it and keep a copy each.</p>
+        <article class="agree" id="pl-agree" aria-live="polite"></article>
+        <div class="agree-sign">
+          <label class="check"><input type="checkbox" id="sign-p"><span>Partner agrees</span></label>
+          <label class="check"><input type="checkbox" id="sign-s"><span>Comprentice agrees</span></label>
+        </div>
+        <div class="agree-actions">
+          <button type="button" class="btn" id="pl-copy">Copy Agreement</button>
+          <span class="note" id="pl-copied" role="status"></span>
+        </div>
+      </div>
+
+      <div class="pl-nav">
+        <button type="button" class="btn ghost" id="pl-back">Back</button>
+        <button type="button" class="btn" id="pl-next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SYLLABUS -->
+  <section class="panel" id="syllabus" role="tabpanel" aria-labelledby="tab-syllabus" hidden>
+    <div class="section-head">
+      <p class="eyebrow">The Course</p>
+      <div class="syl-title"><h2>UNIV 1015: Introduction to Comprenticeship</h2><span class="draft">Draft</span></div>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>1.5</b><span>credits</span></div>
+      <div class="fact"><b>15</b><span>weeks</span></div>
+      <div class="fact"><b>1 hr</b><span>weekly seminar</span></div>
+      <div class="fact"><b>1.5 hrs</b><span>a week with one partner</span></div>
+      <div class="fact"><b>2–3</b><span>students per group, or solo · open to all majors</span></div>
+    </div>
+
+    <div class="col">
+      <details>
+        <summary>Learning Outcomes</summary>
+        <div class="dbody">
+          <p>By the end of the semester, students will be able to:</p>
+          <ol>
+            <li>Explain the difference between one-way service and reciprocal, community-engaged learning.</li>
+            <li>Map a community's strengths, cultural assets, history and people, not only its needs.</li>
+            <li>Listen to and learn from community members as teachers and experts, without imposing solutions.</li>
+            <li>Keep a consistent weekly commitment and build a trusted relationship over time.</li>
+            <li>Co-create a project with a community partner, based on what the partner asks for.</li>
+            <li>Reflect on how the community changed their thinking, values, civic identity and sense of belonging.</li>
+            <li>Tell the story of their experience honestly and with consent, crediting the community's leadership.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary>15-Week Schedule</summary>
+        <div class="dbody">
+          <div class="tablebox">
+            <table>
+              <thead><tr><th>Week</th><th>Phase</th><th>Seminar Topic</th><th>In the Community</th></tr></thead>
+              <tbody>
+                <tr><td class="wk">1</td><td>Foundations</td><td>Why "service" can be one-way</td><td>Review partner list; match with a partner</td></tr>
+                <tr><td class="wk">2</td><td>Foundations</td><td>Reciprocity: learning with, not for</td><td>Site orientation, safety onboarding, background checks</td></tr>
+                <tr><td class="wk">3</td><td>Foundations</td><td>Mapping strengths: people, places, history</td><td>Neighborhood walk; community strengths map</td></tr>
+                <tr class="phase-start"><td class="wk">4</td><td>Listening</td><td>The community as teacher</td><td>First visit: observe, shadow, ask open questions</td></tr>
+                <tr><td class="wk">5</td><td>Listening</td><td>How to listen without fixing</td><td>Interview partner staff or a community member</td></tr>
+                <tr><td class="wk">6</td><td>Listening</td><td>Assumptions vs. reality</td><td>Shadow a program or community interaction</td></tr>
+                <tr class="phase-start"><td class="wk">7</td><td>Practice</td><td>Showing up: routine and trust</td><td>Begin weekly routine (1.5 hours)</td></tr>
+                <tr><td class="wk">8</td><td>Practice</td><td>Midterm check-in</td><td>Routine; midterm partner feedback</td></tr>
+                <tr><td class="wk">9</td><td>Practice</td><td>Power, privilege and dignity</td><td>Routine</td></tr>
+                <tr><td class="wk">10</td><td>Practice</td><td>Belonging and agency</td><td>Routine; partner names a project need</td></tr>
+                <tr><td class="wk">11</td><td>Practice</td><td>Planning with, not for</td><td>Co-plan the project with the site supervisor</td></tr>
+                <tr><td class="wk">12</td><td>Practice</td><td>Storytelling with consent</td><td>Routine; begin the project</td></tr>
+                <tr class="phase-start"><td class="wk">13</td><td>Give Back</td><td>Project work session</td><td>Build the project at the partner site</td></tr>
+                <tr><td class="wk">14</td><td>Give Back</td><td>Delivery and gratitude</td><td>Deliver the project; final partner feedback</td></tr>
+                <tr><td class="wk">15</td><td>Give Back</td><td>Final showcase and storytelling</td><td>Campus symposium with partners as honored guests</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Assignments &amp; Grading</summary>
+        <div class="dbody">
+          <div class="tablebox">
+            <table>
+              <thead><tr><th>Assignment</th><th class="num">Weight</th><th>Graded By</th></tr></thead>
+              <tbody>
+                <tr><td>Seminar participation and weekly reflection logs</td><td class="num">20%</td><td>Instructor</td></tr>
+                <tr><td>Community strengths map (Week 3)</td><td class="num">10%</td><td>Instructor</td></tr>
+                <tr><td>Listening interview write-up (Week 5)</td><td class="num">10%</td><td>Instructor</td></tr>
+                <tr><td>Consistency, attendance and presence</td><td class="num">15%</td><td>Instructor, using partner feedback</td></tr>
+                <tr><td>Co-created partner project (Weeks 11–14)</td><td class="num">25%</td><td>Instructor, using partner feedback</td></tr>
+                <tr><td>Final showcase and "What the Community Taught Me" story</td><td class="num">20%</td><td>Instructor</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">The faculty instructor assigns all grades. Partners give feedback twice a semester and never see grades.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Readings</summary>
+        <div class="dbody">
+          <p>No textbook purchase is required. Readings are drawn from:</p>
+          <ul>
+            <li>Robert Sigmon, "Service-Learning: Three Principles" (1979)</li>
+            <li>Ivan Illich, "To Hell with Good Intentions" (1968)</li>
+            <li>John Kretzmann and John McKnight, <em>Building Communities from the Inside Out</em> (1993), excerpts</li>
+            <li>Tania D. Mitchell, "Traditional vs. Critical Service-Learning" (2008)</li>
+            <li>Paulo Freire, <em>Pedagogy of the Oppressed</em>, selected excerpts</li>
+            <li>Reports, histories and guest talks from community partners</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Enrollment &amp; Opt-Out Policy</summary>
+        <div class="dbody">
+          <ul>
+            <li><strong>Pilot phase:</strong> launches as an elective first-year seminar, with sections sized to the number of partners who have agreed to host.</li>
+            <li><strong>Default registration after the pilot:</strong> once partner capacity is confirmed, incoming first-year students are pre-registered.</li>
+            <li><strong>Simple opt-out:</strong> one step in the registration portal before the add/drop deadline. No advisor meeting required.</li>
+            <li><strong>Alternative pathways:</strong> students who work, commute or care for family can complete the placement through a campus-based partner project or community work they already do.</li>
+            <li><strong>Scaling rule:</strong> new sections open only when enough partners can host, so no organization is asked to take more students than it can teach.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>The Comprentice Certification</summary>
+        <div class="dbody">
+          <p>Students who complete the course earn the <strong>Comprentice Certification: Reciprocal Community Impact</strong>, a stackable digital credential that can be shared on LinkedIn and added to the co-curricular record.</p>
+          <p>To earn it, a student must:</p>
+          <ol>
+            <li>Complete all 8 modules and 15 seminar meetings.</li>
+            <li>Earn a final grade of B or higher.</li>
+            <li>Verify 18 field hours with their partner (missed visits can be made up).</li>
+            <li>Receive a satisfactory final evaluation from their partner.</li>
+            <li>Deliver the project the partner requested.</li>
+            <li>Give a consent-based showcase presentation that credits community co-educators.</li>
+          </ol>
+          <p class="note">Appeals: if a placement ends for reasons outside a student's control, or a student disagrees with a partner evaluation, the instructor reviews the evidence and may arrange a new placement.</p>
+        </div>
+      </details>
+
+      <div class="cta">
+        <button class="btn" type="button" id="download-btn">Download the Full Syllabus (PDF)</button>
+        <p class="note" id="download-note" hidden></p>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">Comprenticeship — learning with the community, not for it.</div>
+</footer>
+
+<script>
+(function () {
+  var names = ['story', 'how', 'canvas', 'syllabus'];
+  var labels = { story: 'The Story', how: 'How It Works', canvas: 'The Canvas', syllabus: 'The Syllabus' };
+  var aliases = { origin: ['story', 'origin-word'], word: ['story', 'origin-word'], partners: ['how', 'for-partners'] };
+  var mBtn = document.getElementById('mnav-btn'), mList = document.getElementById('mnav-list'), mCur = document.getElementById('mnav-cur');
+  function closeMenu() { mList.hidden = true; mBtn.setAttribute('aria-expanded', 'false'); }
+  mBtn.addEventListener('click', function () { var open = mList.hidden; mList.hidden = !open; mBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  mList.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mList.hidden) { closeMenu(); mBtn.focus(); } });
+  function route() {
+    var h = location.hash.slice(1), target = null;
+    if (aliases[h]) { target = aliases[h][1]; h = aliases[h][0]; }
+    show(h);
+    var cur = names.indexOf(h) === -1 ? 'story' : h;
+    mCur.textContent = labels[cur];
+    Array.prototype.slice.call(mList.querySelectorAll('a')).forEach(function (a) {
+      var k = a.getAttribute('href').slice(1);
+      if (k === location.hash.slice(1) || (k === cur && !aliases[location.hash.slice(1)])) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    if (target) {
+      requestAnimationFrame(function () {
+        var el = document.getElementById(target);
+        var bar = document.querySelector('.tabbar').offsetHeight;
+        window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - bar - 16);
+      });
+    } else { window.scrollTo(0, 0); }
+  }
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+  function show(name, focusTab) {
+    if (names.indexOf(name) === -1) name = 'story';
+    names.forEach(function (n) {
+      document.getElementById(n).hidden = (n !== name);
+    });
+    tabs.forEach(function (t) {
+      var on = t.getAttribute('data-tab') === name;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (on) {
+        t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        if (focusTab) t.focus();
+      }
+    });
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () {
+      var name = t.getAttribute('data-tab');
+      if (location.hash !== '#' + name) location.hash = name; else { show(name); window.scrollTo(0, 0); }
+    });
+    t.addEventListener('keydown', function (e) {
+      var j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      if (j !== null) { e.preventDefault(); tabs[j].click(); tabs[j].focus(); }
+    });
+  });
+
+  window.addEventListener('hashchange', route);
+  route();
+
+  var dlBtn = document.getElementById('download-btn');
+  var dlNote = document.getElementById('download-note');
+  function note(msg) { dlNote.textContent = msg; dlNote.hidden = !msg; }
+  var downloadsReady = (window.claude && window.claude.use) ? window.claude.use('downloads') : Promise.resolve(null);
+  dlBtn.addEventListener('click', async function () {
+    note('');
+    var downloads = await downloadsReady;
+    if (!downloads) { window.location.href = 'UNIV_1015_Comprenticeship_Syllabus.pdf'; return; }
+    dlBtn.disabled = true;
+    try {
+      var res = await fetch('UNIV_1015_Comprenticeship_Syllabus.pdf');
+      if (!res.ok) throw { code: 'fetch' };
+      var blob = await res.blob();
+      await downloads.save({ filename: 'UNIV_1015_Comprenticeship_Syllabus.pdf', data: blob });
+      note('Syllabus saved.');
+    } catch (e) {
+      var code = e && e.code;
+      if (code === 'declined') note('');
+      else if (code === 'rate_limited') note('A save prompt is already open. Try again in a moment.');
+      else note('The syllabus could not be saved here. Try again later.');
+    } finally {
+      dlBtn.disabled = false;
+    }
+  });
+  var cvBtn = document.getElementById('canvas-dl');
+  var cvNote = document.getElementById('canvas-dl-note');
+  cvBtn.addEventListener('click', async function () {
+    function say(m) { cvNote.textContent = m; cvNote.hidden = !m; }
+    say('');
+    var downloads = await downloadsReady;
+    if (!downloads) { window.location.href = 'Comprenticeship_Canvas.pdf'; return; }
+    cvBtn.disabled = true;
+    try {
+      var res = await fetch('Comprenticeship_Canvas.pdf');
+      if (!res.ok) throw { code: 'fetch' };
+      await downloads.save({ filename: 'Comprenticeship_Canvas.pdf', data: await res.blob() });
+      say('Canvas saved.');
+    } catch (e) {
+      var code = e && e.code;
+      if (code === 'declined') say('');
+      else if (code === 'rate_limited') say('A save prompt is already open. Try again in a moment.');
+      else say('The canvas could not be saved here. Try again later.');
+    } finally { cvBtn.disabled = false; }
+  });
+  document.getElementById('partner-btn').addEventListener('click', function () {
+    document.getElementById('partner-note').hidden = false;
+  });
+})();
+
+/* Comprentice Canvas planner */
+(function () {
+  var root = document.getElementById('planner');
+  if (!root) return;
+  var steps = Array.prototype.slice.call(root.querySelectorAll('.pl-step'));
+  var list = document.getElementById('pl-steps');
+  var fill = document.getElementById('pl-fill');
+  var back = document.getElementById('pl-back');
+  var next = document.getElementById('pl-next');
+  var note = document.getElementById('pl-note');
+  var KEY = 'comprentice-canvas-v1';
+  var cur = 1;
+
+  steps.forEach(function (s) {
+    var n = +s.getAttribute('data-step');
+    var li = document.createElement('li');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('data-go', n);
+    var num = document.createElement('span'); num.className = 'n'; num.textContent = n === 9 ? '★' : n;
+    var t = document.createElement('span'); t.textContent = s.getAttribute('data-title');
+    b.appendChild(num); b.appendChild(t);
+    b.addEventListener('click', function () { go(n); });
+    li.appendChild(b); list.appendChild(li);
+  });
+
+  function fields() { return Array.prototype.slice.call(root.querySelectorAll('input, textarea')); }
+  function keyOf(el) {
+    if (el.type === 'checkbox' || el.type === 'radio') {
+      var g = el.closest('[data-group]');
+      return (g ? g.getAttribute('data-group') : el.id) + '::' + el.value;
+    }
+    return el.id;
+  }
+  function read() {
+    var d = {};
+    fields().forEach(function (el) {
+      if (!el.id && !el.closest('[data-group]')) return;
+      d[keyOf(el)] = (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value;
+    });
+    return d;
+  }
+  function write(d) {
+    fields().forEach(function (el) {
+      var k = keyOf(el);
+      if (!(k in d)) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = !!d[k]; else el.value = d[k];
+    });
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify({ d: read(), s: cur })); } catch (e) {} }
+  function load() {
+    try { var raw = localStorage.getItem(KEY); if (!raw) return; var o = JSON.parse(raw); write(o.d || {}); if (o.s) cur = o.s; } catch (e) {}
+  }
+
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function picked(group) {
+    return Array.prototype.slice.call(root.querySelectorAll('[data-group="' + group + '"] input:checked')).map(function (i) { return i.value; });
+  }
+  function stepFilled(n) {
+    var s = steps[n - 1];
+    return Array.prototype.slice.call(s.querySelectorAll('input, textarea')).some(function (el) {
+      if (el.type === 'checkbox' || el.type === 'radio') return el.checked;
+      if (el.type === 'time') return false;
+      return el.value.trim() !== '';
+    });
+  }
+
+  function fmtTime(v) {
+    if (!v) return '';
+    var p = v.split(':'), h = +p[0], m = p[1];
+    var ap = h >= 12 ? 'pm' : 'am'; var h12 = h % 12 || 12;
+    var end = new Date(2000, 0, 1, h, +m + 90);
+    var eh = end.getHours(), em = ('0' + end.getMinutes()).slice(-2);
+    var eap = eh >= 12 ? 'pm' : 'am';
+    return h12 + ':' + m + ' ' + ap + ' to ' + (eh % 12 || 12) + ':' + em + ' ' + eap;
+  }
+
+  function meter() {
+    var day = (root.querySelector('[data-group="t-day"] input:checked') || {}).value;
+    var wk = document.getElementById('pl-weeks');
+    if (!wk.children.length) {
+      for (var i = 4; i <= 15; i++) { var c = document.createElement('i'); c.textContent = i; c.title = 'Week ' + i; wk.appendChild(c); }
+    }
+    wk.classList.toggle('on', !!day);
+    document.getElementById('pl-when').textContent = day ? 'Every ' + day + ', ' + fmtTime(val('t-time')) : 'Pick a day';
+  }
+
+  function row(dl, label, text) {
+    var dt = document.createElement('dt'); dt.textContent = label;
+    var dd = document.createElement('dd');
+    if (text) dd.textContent = text; else { dd.textContent = 'Not filled in yet'; dd.className = 'empty'; }
+    dl.appendChild(dt); dl.appendChild(dd);
+  }
+  function agreementData() {
+    var day = (root.querySelector('[data-group="t-day"] input:checked') || {}).value;
+    var dignity = picked('t-dignity'); if (val('t-extra')) dignity.push(val('t-extra'));
+    return {
+      org: val('p-org'), mentor: val('p-mentor'), student: val('s-name'),
+      rows: [
+        ['Who we serve', val('p-mission')],
+        ['What the community teaches', val('p-teach')],
+        ['What the student brings', picked('s-bring').join(', ')],
+        ['What the student hopes to learn', val('s-hope')],
+        ['Assumption to test', val('s-assume')],
+        ['Listening first', [picked('p-learn').length ? 'Learn from: ' + picked('p-learn').join(', ') : '', val('p-shadow') ? 'Shadow: ' + val('p-shadow') : '', val('s-qs') ? 'Questions:\n' + val('s-qs') : ''].filter(Boolean).join('\n')],
+        ['Weekly routine', day ? 'Every ' + day + ', ' + fmtTime(val('t-time')) + ', Weeks 4 to 15 (18 hours)' + (val('t-travel') ? '\nGetting there: ' + val('t-travel') : '') + (val('t-miss') ? '\nIf a week is missed: ' + val('t-miss') : '') : ''],
+        ['The project', [val('p-need'), val('s-help') ? 'Student\'s contribution: ' + val('s-help') : '', val('p-notfix') ? 'Not ours to fix: ' + val('p-notfix') : ''].filter(Boolean).join('\n')],
+        ['Partner gains', picked('p-gain').join(', ')],
+        ['Student gains', picked('s-gain').join(', ')],
+        ['Safety and dignity', dignity.join('\n')],
+        ['What lasts', picked('t-lasts').join(', ')]
+      ]
+    };
+  }
+  function renderAgreement() {
+    var a = agreementData();
+    var box = document.getElementById('pl-agree');
+    box.textContent = '';
+    var h = document.createElement('h4'); h.textContent = 'Comprentice Agreement'; box.appendChild(h);
+    var p = document.createElement('p'); p.className = 'parties';
+    p.textContent = (a.org || '[Partner organization]') + (a.mentor ? ' (' + a.mentor + ')' : '') + ' and ' + (a.student || '[Comprentice]');
+    box.appendChild(p);
+    var dl = document.createElement('dl');
+    a.rows.forEach(function (r) { row(dl, r[0], r[1]); });
+    box.appendChild(dl);
+  }
+  function agreementText() {
+    var a = agreementData();
+    var lines = ['COMPRENTICE AGREEMENT', (a.org || '[Partner organization]') + (a.mentor ? ' (' + a.mentor + ')' : '') + ' and ' + (a.student || '[Comprentice]'), ''];
+    a.rows.forEach(function (r) { lines.push(r[0].toUpperCase()); lines.push(r[1] || '(not filled in)'); lines.push(''); });
+    lines.push('Partner agrees: ' + (document.getElementById('sign-p').checked ? 'Yes' : 'Not yet'));
+    lines.push('Comprentice agrees: ' + (document.getElementById('sign-s').checked ? 'Yes' : 'Not yet'));
+    lines.push('', 'Comprenticeship: learning with the community, not for it.');
+    return lines.join('\n');
+  }
+
+  function go(n) {
+    cur = Math.max(1, Math.min(9, n));
+    steps.forEach(function (s) { s.hidden = +s.getAttribute('data-step') !== cur; });
+    Array.prototype.slice.call(list.querySelectorAll('button')).forEach(function (b) {
+      var k = +b.getAttribute('data-go');
+      if (k === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.classList.toggle('done', k < 9 && stepFilled(k));
+    });
+    fill.style.width = ((cur - 1) / 8 * 100) + '%';
+    back.disabled = cur === 1;
+    next.textContent = cur === 8 ? 'See Our Agreement' : (cur === 9 ? 'Back to Step 1' : 'Next');
+    if (cur === 4) meter();
+    if (cur === 9) renderAgreement();
+    save();
+  }
+
+  back.addEventListener('click', function () { go(cur - 1); scrollTop(); });
+  next.addEventListener('click', function () { go(cur === 9 ? 1 : cur + 1); scrollTop(); });
+  function scrollTop() { var top = root.getBoundingClientRect().top + window.scrollY - 90; if (window.scrollY > top) window.scrollTo(0, top); }
+
+  root.addEventListener('input', function () { if (cur === 4) meter(); save(); markDone(); });
+  root.addEventListener('change', function () { if (cur === 4) meter(); save(); markDone(); });
+  function markDone() {
+    Array.prototype.slice.call(list.querySelectorAll('button')).forEach(function (b) {
+      var k = +b.getAttribute('data-go'); b.classList.toggle('done', k < 9 && stepFilled(k));
+    });
+  }
+
+  function flash(msg) { note.textContent = msg; note.hidden = false; setTimeout(function () { note.hidden = true; }, 3000); }
+
+  var EX = {
+    'p-org': 'Northside Food Shelf (example)', 'p-mentor': 'Maria, volunteer coordinator',
+    'p-mission': 'We provide groceries and a welcoming space to about 300 families a month on the north side.',
+    's-name': 'Amina, nursing major', 's-bring::Another language': true, 's-bring::Writing': true, 's-bring::Lived experience': true,
+    's-hope': 'How a small nonprofit really runs, and how to talk with families without judgment.',
+    'p-teach': 'How food insecurity actually works on our block: who comes, why, and how dignity shapes every interaction.',
+    's-assume': 'That most families who come here are unemployed.',
+    'p-learn::Staff': true, 'p-learn::Long-time volunteers': true, 'p-learn::Community members we serve (with consent)': true,
+    'p-shadow': 'Tuesday intake and Thursday distribution',
+    's-qs': '1. What has changed here in the last ten years?\n2. What do new volunteers usually get wrong?\n3. What makes a family come back?',
+    't-day::Thursday': true, 't-time': '15:00', 't-travel': 'Bus route 19, about 20 minutes', 't-miss': 'Text Maria a day ahead; make up the visit on a Tuesday',
+    'p-need': 'A simple welcome guide for new volunteers.', 'p-notfix': 'Our intake process',
+    's-help': 'I can write the guide and translate it into Somali.',
+    'p-gain::Steady weekly help': true, 'p-gain::A finished project we can keep': true, 'p-gain::A future volunteer or staff member': true,
+    's-gain::Real-world skills': true, 's-gain::A mentor': true, 's-gain::Understanding of my community': true,
+    't-dignity::Orientation completed before the first visit': true, 't-dignity::No photos, audio or posts of people without written consent': true,
+    't-dignity::Names of people served are never recorded or shared': true, 't-dignity::Stories are told with consent and credit the community': true,
+    't-extra': 'Food-safety training in Week 2',
+    't-lasts::Volunteer events': true, 't-lasts::Mentoring the next comprentice': true, 't-lasts::Keeping the project up to date': true
+  };
+  document.getElementById('pl-example').addEventListener('click', function () {
+    fields().forEach(function (el) { if (el.type === 'checkbox' || el.type === 'radio') el.checked = false; else if (el.type !== 'time') el.value = ''; });
+    write(EX); go(cur); markDone(); flash('Example filled in. It describes a fictional food shelf.');
+  });
+  document.getElementById('pl-clear').addEventListener('click', function () {
+    fields().forEach(function (el) { if (el.type === 'checkbox' || el.type === 'radio') el.checked = false; else if (el.type === 'time') el.value = '15:00'; else el.value = ''; });
+    go(1); markDone(); flash('Cleared. Starting from Step 1.');
+  });
+
+  document.getElementById('pl-copy').addEventListener('click', function () {
+    var txt = agreementText(); var msg = document.getElementById('pl-copied');
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      msg.textContent = ok ? 'Copied. Paste it into an email or document.' : 'Copy is blocked here. Select the agreement text and copy it.';
+    }
+    try {
+      navigator.clipboard.writeText(txt).then(function () { msg.textContent = 'Copied. Paste it into an email or document.'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  load();
+  go(cur);
+})();
+</script>
+</body>
+</html>
