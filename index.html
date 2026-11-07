@@ -995,17 +995,25 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
   var mBtn = document.getElementById('mnav-btn'), mList = document.getElementById('mnav-list'), mCur = document.getElementById('mnav-cur');
   function closeMenu() { mList.hidden = true; mBtn.setAttribute('aria-expanded', 'false'); }
   mBtn.addEventListener('click', function () { var open = mList.hidden; mList.hidden = !open; mBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-  mList.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+  mList.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    e.preventDefault(); closeMenu(); go(a.getAttribute('href').slice(1));
+  });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mList.hidden) { closeMenu(); mBtn.focus(); } });
-  function route() {
-    var h = location.hash.slice(1), target = null;
+  function clearHash() {
+    if (!location.hash) return;
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  }
+  function route() { var h = location.hash.slice(1); clearHash(); go(h); }
+  function go(key) {
+    var h = key, target = null;
     if (aliases[h]) { target = aliases[h][1]; h = aliases[h][0]; }
     show(h);
     var cur = names.indexOf(h) === -1 ? 'story' : h;
     mCur.textContent = labels[cur];
     Array.prototype.slice.call(mList.querySelectorAll('a')).forEach(function (a) {
       var k = a.getAttribute('href').slice(1);
-      if (k === location.hash.slice(1) || (k === cur && !aliases[location.hash.slice(1)])) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      if (k === key || (k === cur && !aliases[key])) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     if (target) {
       requestAnimationFrame(function () {
@@ -1036,7 +1044,7 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
   tabs.forEach(function (t, i) {
     t.addEventListener('click', function () {
       var name = t.getAttribute('data-tab');
-      if (location.hash !== '#' + name) location.hash = name; else { show(name); window.scrollTo(0, 0); }
+      go(name);
     });
     t.addEventListener('keydown', function (e) {
       var j = null;
