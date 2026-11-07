@@ -316,6 +316,11 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
 }
 
 
+
+/* Guiding principle */
+.principle { border-top: 3px double var(--ink); border-bottom: 1px solid var(--ink); padding-block: 22px; display: grid; gap: 8px; font-family: var(--sans); }
+.principle .principle-line { font-family: var(--serif); font-size: clamp(26px, 4vw, 34px); font-weight: 600; line-height: 1.15; color: var(--accent); }
+.principle p:last-child { font-family: var(--serif); font-size: 18px; color: var(--ink-soft); }
 /* Partner readiness */
 .ready { margin-top: 36px; background: var(--tint); border-top: 1px solid var(--ink); padding: 22px 24px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr); gap: 20px 32px; }
 .ready-head h3 { font-size: 26px; margin-top: 6px; }
@@ -405,6 +410,11 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
           <li><strong>The relationship is a weekly routine over a full semester.</strong> Trust takes time, so one-off visits are not enough.</li>
           <li><strong>The final project is shaped by what the partner asks for.</strong> Not by what a student assumes is needed.</li>
         </ul>
+        <aside class="principle">
+          <p class="eyebrow">The Guiding Principle</p>
+          <p class="principle-line">Start where the community is.</p>
+          <p>Borrowed from social work: we don't predict what people need. We work with them to get what they want. Success is measured by whether the community got what it asked for, not by whether a student hit an hour count.</p>
+        </aside>
         <p>In practice, students spend a semester with one community partner, ideally in a small group of two or three classmates so they build belonging with each other as well as with the community. Students can also choose to go solo. They listen before they act. They show up every week. And they finish by co-creating something the partner actually asked for, then celebrate it together, with partners in the room as honored co-educators.</p>
         <p>The result is a different kind of graduate: one who has learned that showing up, again and again, is how you become part of a place.</p>
       </div>
@@ -523,13 +533,13 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
 
     <div class="ready">
       <div class="ready-head">
-        <p class="eyebrow">Before Week 1</p>
+        <p class="eyebrow">Before Week 1 · 1–2 months ahead</p>
         <h3>Partner Readiness</h3>
         <p>No cold emails and no meetings without an agenda. Partners prepare before students arrive.</p>
       </div>
       <ol class="ready-steps">
         <li><b>Partner orientation</b><span>The nonprofit learns how comprenticeship works and what to expect each week.</span></li>
-        <li><b>A real problem, named early</b><span>The partner names a challenge it wants help with, so students' skills can be matched to it.</span></li>
+        <li><b>A real problem, named early</b><span>The partner names a challenge as a starting point, so students' skills can be matched to it. Students learn why it matters before shaping the work.</span></li>
         <li><b>A matched group arrives</b><span>A dedicated group of 2–3 students shows up expecting that problem, with the Canvas as the first meeting's agenda.</span></li>
       </ol>
     </div>
@@ -575,6 +585,7 @@ footer { border-top: 3px double var(--ink); padding-block: 22px 32px; text-align
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.4"></circle><path d="M3 19a6 6 0 0 1 12 0"></path><path d="M15 19a4.5 4.5 0 0 1 6-4.2"></path></svg><span>Host 2 to 5 students per semester, usually one or two small groups, so you are never overwhelmed.</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"></path></svg><span>Receive public recognition as a co-educator in course materials and at the final showcase.</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg><span>Give feedback twice a semester; faculty handle all grades.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg><span>Direct support for the people you serve stays with your trained staff. Students work alongside them, under your guidance.</span></li>
       </ul>
       <div class="cta">
         <button class="btn" type="button" id="partner-btn">Become a Partner</button>
